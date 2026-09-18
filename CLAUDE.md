@@ -8,11 +8,17 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Current State & Commands
 
-Şu an `package.json` yok — proje tek dosyadan (`index.html`) oluşuyor, build/lint/test adımı gerektirmiyor. Dosya doğrudan bir tarayıcıda açılarak (veya `python -m http.server` gibi basit bir statik sunucuyla) görüntülenebilir.
+`package.json` mevcut — proje React + Vite ile yapılandırılmış. Standart Vite komutları:
+- `npm install`: bağımlılıkları yükle
+- `npm run dev`: geliştirme sunucusu (örn. `http://localhost:5173`)
+- `npm run build`: `dist/` klasörüne üretim derlemesi
+- `npm run preview`: derlenmiş sürümü önizleme
 
-React + Vite'a geçiş için onaylanmış bir tasarım dokümanı mevcut ama henüz uygulanmadı: `docs/superpowers/specs/2026-09-18-react-vite-conversion-design.md`. Bu geçiş yapıldığında standart Vite komutları (`npm install`, `npm run dev`, `npm run build`) geçerli olacak — o noktada bu dosya güncellenmeli.
+Lint veya test adımı bulunmuyor (proje kapsamında değil). Orijinal statik HTML versiyonu git geçmişinde (depo ilk commit'inde) `git show <first-commit-sha>:index.html` ile erişilebilir.
 
 ## Architecture
 
-- `index.html` — tüm sayfa: dahili `<style>` bloğu (CSS custom properties ile açık/koyu tema desteği, `prefers-color-scheme` üzerinden) ve statik içerik (profil bilgisi, "Hakkımda" bölümü, LinkedIn/GitHub buton linkleri).
-- Planlanan React yapısı (spec dosyasında detaylı): `ProfileCard`, `AboutSection`, `ContactLinks` bileşenlerine bölünecek, tek bir global `src/index.css` mevcut stilleri birebir taşıyacak — class adları ve görsel çıktı korunacak.
+- `index.html` — kök sayfa, `#root` div'ine React uygulaması monte edilir.
+- `src/main.jsx` — `App.jsx` bileşenini `index.html`'deki `#root`'a bağlar.
+- `src/App.jsx` — üç sunum bileşenini oluşturur: `ProfileCard` (avatar/ad/unvan/tagline), `AboutSection` (başlık + paragraf), `ContactLinks` (LinkedIn/GitHub düğmeleri, `icons.jsx`'den inline SVG'ler kullanır). Profil/hakkımda/linkler verileri konsts olarak tanımlanmış ve bileşenlere prop olarak aktarılmış — ayrı veri dosyası, state yönetimi veya veri getirme yok, statik kişi kartı.
+- `src/index.css` — orjinal statik sayfadan aktarılan global stiller, açık/koyu tema desteği (`prefers-color-scheme`) ve 400px'te responsive kesinti noktası.
