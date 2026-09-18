@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gül Yeşil | Dijital Kartvizit</title>
+<meta name="description" content="Gül Yeşil - Operation Specialist. Dijital kartvizit.">
+<style>
+  :root {
+    --bg-start: #eef2f7;
+    --bg-end: #dfe7f0;
+    --card-bg: #ffffff;
+    --text-primary: #1b2430;
+    --text-secondary: #4a5568;
+    --accent: #2f6f5e;
+    --accent-dark: #24564a;
+    --border: #e6eaef;
+    --shadow: rgba(27, 36, 48, 0.12);
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  html, body {
+    height: 100%;
+  }
+
+  body {
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    background: linear-gradient(160deg, var(--bg-start), var(--bg-end));
+    color: var(--text-primary);
+  }
+
+  .card {
+    width: 100%;
+    max-width: 420px;
+    background: var(--card-bg);
+    border-radius: 20px;
+    box-shadow: 0 20px 45px var(--shadow);
+    padding: 40px 32px;
+    text-align: center;
+  }
+
+  .avatar {
+    width: 84px;
+    height: 84px;
+    margin: 0 auto 20px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    font-weight: 600;
+    letter-spacing: 1px;
+  }
+
+  h1 {
+    margin: 0 0 4px;
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 1.3;
+  }
+
+  .title {
+    margin: 0 0 16px;
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+  }
+
+  .tagline {
+    margin: 0 0 24px;
+    font-size: 15px;
+    line-height: 1.5;
+    color: var(--text-secondary);
+    font-style: italic;
+  }
+
+  .divider {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 24px 0;
+  }
+
+  .about h2 {
+    margin: 0 0 10px;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    color: var(--text-primary);
+  }
+
+  .about p {
+    margin: 0;
+    font-size: 14.5px;
+    line-height: 1.65;
+    color: var(--text-secondary);
+    text-align: left;
+  }
+
+  .contact {
+    margin-top: 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 13px 18px;
+    border-radius: 12px;
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 600;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+
+  .btn svg {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+  }
+
+  .btn:hover,
+  .btn:focus-visible {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px var(--shadow);
+  }
+
+  .btn-linkedin {
+    background: #0a66c2;
+    color: #fff;
+  }
+
+  .btn-github {
+    background: #1b1f23;
+    color: #fff;
+  }
+
+  @media (max-width: 400px) {
+    .card {
+      padding: 32px 22px;
+      border-radius: 16px;
+    }
+
+    h1 {
+      font-size: 21px;
+    }
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg-start: #12161c;
+      --bg-end: #1a2029;
+      --card-bg: #1e242d;
+      --text-primary: #f1f4f8;
+      --text-secondary: #b9c2cf;
+      --accent: #4fb59b;
+      --accent-dark: #3a8f7a;
+      --border: #2c3440;
+      --shadow: rgba(0, 0, 0, 0.45);
+    }
+  }
+</style>
+</head>
+<body>
+  <main class="card">
+    <div class="avatar" aria-hidden="true">GY</div>
+    <h1>Gül Yeşil</h1>
+    <p class="title" lang="en">Operation Specialist</p>
+    <p class="tagline">Şirketlerdeki data lojistik alanında operasyon süreçlerini yönetiyor.</p>
+
+    <hr class="divider">
+
+    <section class="about">
+      <h2>Hakkımda</h2>
+      <p>
+        Gül Yeşil, şirketlerin data lojistik alanındaki operasyon süreçlerini uçtan uca yönetiyor.
+        Veri akışının doğru ve zamanında ilerlemesini sağlamak, operasyonel süreçleri sistemli bir
+        şekilde yürütmek işinin merkezinde yer alıyor. Detaylara verdiği önem ve sistematik
+        yaklaşımıyla, karmaşık süreçleri sadeleştirip sürdürülebilir hale getirmeyi hedefliyor.
+      </p>
+    </section>
+
+    <nav class="contact" aria-label="İletişim linkleri">
+      <a class="btn btn-linkedin" href="https://www.linkedin.com/in/g%C3%BCl-ye%C5%9Fil/" target="_blank" rel="noopener noreferrer">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.36V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.36-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45z"/></svg>
+        LinkedIn
+      </a>
+      <a class="btn btn-github" href="https://github.com/gulyesil" target="_blank" rel="noopener noreferrer">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.61.07-.61 1 .07 1.53 1.03 1.53 1.03.89 1.53 2.34 1.09 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.56-1.11-4.56-4.93 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.02a9.5 9.5 0 0 1 5 0c1.91-1.29 2.75-1.02 2.75-1.02.55 1.38.2 2.4.1 2.65.64.7 1.03 1.59 1.03 2.68 0 3.83-2.34 4.68-4.57 4.92.36.31.68.92.68 1.85v2.74c0 .27.18.58.69.48A10 10 0 0 0 12 2z"/></svg>
+        GitHub
+      </a>
+    </nav>
+  </main>
+</body>
+</html>
