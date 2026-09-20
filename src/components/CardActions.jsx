@@ -79,8 +79,10 @@ function SaveCardModal({ onClose, onSubmit, status, contactEmail }) {
         </label>
         <label className="consent-label">
           <input type="checkbox" checked={consent} onChange={(e) => setConsent(e.target.checked)} required />
-          Kişisel verilerimin <PrivacyPolicyLink contactEmail={contactEmail} />'nda açıklanan şekilde işlenmesini kabul
-          ediyorum.
+          <span>
+            Kişisel verilerimin <PrivacyPolicyLink contactEmail={contactEmail} />'nda açıklanan şekilde işlenmesini
+            kabul ediyorum.
+          </span>
         </label>
         <StatusMessage status={status} />
         <button type="submit" className="btn btn-modal-submit" disabled={!consent}>
@@ -126,8 +128,10 @@ function MeetingRequestModal({ onClose, onSubmit, status, contactEmail }) {
         </label>
         <label className="consent-label">
           <input type="checkbox" checked={consent} onChange={(e) => setConsent(e.target.checked)} required />
-          Kişisel verilerimin <PrivacyPolicyLink contactEmail={contactEmail} />'nda açıklanan şekilde işlenmesini kabul
-          ediyorum.
+          <span>
+            Kişisel verilerimin <PrivacyPolicyLink contactEmail={contactEmail} />'nda açıklanan şekilde işlenmesini
+            kabul ediyorum.
+          </span>
         </label>
         <StatusMessage status={status} />
         <button type="submit" className="btn btn-modal-submit" disabled={!consent}>
