@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react';
 import { WEBHOOK_URLS } from '../config.js';
 import { buildVCard, downloadVCard } from '../utils/vcard.js';
 import { SaveIcon, CalendarIcon } from './icons.jsx';
+import Modal from './Modal.jsx';
+import PrivacyPolicyLink from './PrivacyPolicy.jsx';
 
 function StatusMessage({ status }) {
   if (!status) return null;
@@ -46,36 +48,9 @@ function useRateLimit(durationMs) {
   return [disabled, () => setDisabled(true)];
 }
 
-function useEscapeToClose(onClose) {
-  useEffect(() => {
-    function handleKeyDown(event) {
-      if (event.key === 'Escape') onClose();
-    }
-    document.addEventListener('keydown', handleKeyDown);
-    return () => document.removeEventListener('keydown', handleKeyDown);
-  }, [onClose]);
-}
-
-function Modal({ title, ariaLabel, onClose, children }) {
-  useEscapeToClose(onClose);
-
-  return (
-    <div className="modal-overlay" onClick={onClose}>
-      <div className="modal" role="dialog" aria-modal="true" aria-label={ariaLabel} onClick={(e) => e.stopPropagation()}>
-        <div className="modal-header">
-          <h2>{title}</h2>
-          <button type="button" className="modal-close" aria-label="Kapat" onClick={onClose}>
-            ×
-          </button>
-        </div>
-        {children}
-      </div>
-    </div>
-  );
-}
-
-function SaveCardModal({ onClose, onSubmit, status }) {
+function SaveCardModal({ onClose, onSubmit, status, contactEmail }) {
   const [form, setForm] = useState({ firstName: '', lastName: '', email: '' });
+  const [consent, setConsent] = useState(false);
 
   function handleChange(event) {
     const { name, value } = event.target;
@@ -102,8 +77,13 @@ function SaveCardModal({ onClose, onSubmit, status }) {
           E-posta
           <input type="email" name="email" value={form.email} onChange={handleChange} required />
         </label>
+        <label className="consent-label">
+          <input type="checkbox" checked={consent} onChange={(e) => setConsent(e.target.checked)} required />
+          Kişisel verilerimin <PrivacyPolicyLink contactEmail={contactEmail} />'nda açıklanan şekilde işlenmesini kabul
+          ediyorum.
+        </label>
         <StatusMessage status={status} />
-        <button type="submit" className="btn btn-modal-submit">
+        <button type="submit" className="btn btn-modal-submit" disabled={!consent}>
           Kartı İndir
         </button>
       </form>
@@ -111,8 +91,9 @@ function SaveCardModal({ onClose, onSubmit, status }) {
   );
 }
 
-function MeetingRequestModal({ onClose, onSubmit, status }) {
+function MeetingRequestModal({ onClose, onSubmit, status, contactEmail }) {
   const [form, setForm] = useState({ name: '', email: '', preferredDateTime: '', note: '' });
+  const [consent, setConsent] = useState(false);
 
   function handleChange(event) {
     const { name, value } = event.target;
@@ -143,8 +124,13 @@ function MeetingRequestModal({ onClose, onSubmit, status }) {
           Kısa konu/not
           <textarea name="note" value={form.note} onChange={handleChange} rows={3} />
         </label>
+        <label className="consent-label">
+          <input type="checkbox" checked={consent} onChange={(e) => setConsent(e.target.checked)} required />
+          Kişisel verilerimin <PrivacyPolicyLink contactEmail={contactEmail} />'nda açıklanan şekilde işlenmesini kabul
+          ediyorum.
+        </label>
         <StatusMessage status={status} />
-        <button type="submit" className="btn btn-modal-submit">
+        <button type="submit" className="btn btn-modal-submit" disabled={!consent}>
           Gönder
         </button>
       </form>
@@ -231,6 +217,7 @@ export default function CardActions({ profile }) {
           onClose={() => setSaveModalOpen(false)}
           onSubmit={handleSaveSubmit}
           status={saveStatus}
+          contactEmail={profile.email}
         />
       )}
       {meetingModalOpen && (
@@ -238,6 +225,7 @@ export default function CardActions({ profile }) {
           onClose={() => setMeetingModalOpen(false)}
           onSubmit={handleMeetingSubmit}
           status={meetingStatus}
+          contactEmail={profile.email}
         />
       )}
     </>
