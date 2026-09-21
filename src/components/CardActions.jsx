@@ -14,6 +14,15 @@ function StatusMessage({ status }) {
   );
 }
 
+function nowInTurkey() {
+  // Türkiye (Europe/Istanbul, UTC+3) saatiyle "YYYY-MM-DDTHH:mm:ss" formatında bir zaman damgası
+  // üretir. new Date().toISOString() UTC verdiği için (örn. Türkiye'de 16:42 iken 13:42 yazardı),
+  // Sheet'te kafa karıştırmaması için burada yerel saate çeviriyoruz.
+  return new Date()
+    .toLocaleString('sv-SE', { timeZone: 'Europe/Istanbul' })
+    .replace(' ', 'T');
+}
+
 async function postToWebhook(url, payload) {
   // no-cors + text/plain keeps this a CORS "simple request" so it isn't blocked by a
   // preflight OPTIONS check — most webhook receivers (n8n, webhook.site, Zapier, ...)
@@ -161,7 +170,7 @@ export default function CardActions({ profile }) {
       await postToWebhook(WEBHOOK_URLS.cardSave, {
         event: 'card.save',
         ...form,
-        timestamp: new Date().toISOString(),
+        timestamp: nowInTurkey(),
       });
       setSaveStatus({ type: 'success' });
       setSaveModalOpen(false);
@@ -175,7 +184,7 @@ export default function CardActions({ profile }) {
       await postToWebhook(WEBHOOK_URLS.meetingRequest, {
         event: 'meeting.request',
         ...form,
-        timestamp: new Date().toISOString(),
+        timestamp: nowInTurkey(),
       });
       setMeetingStatus({ type: 'success' });
       setMeetingModalOpen(false);
