@@ -8,6 +8,7 @@ services:
     environment:
       - GENERIC_TIMEZONE=Europe/Istanbul
       - TZ=Europe/Istanbul
+      - WEBHOOK_URL=http://localhost:5679/
     volumes:
       - n8n_bizcard_data:/home/node/.n8n
 
