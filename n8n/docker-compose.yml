@@ -9,6 +9,8 @@ services:
       - GENERIC_TIMEZONE=Europe/Istanbul
       - TZ=Europe/Istanbul
       - WEBHOOK_URL=http://localhost:5679/
+      - N8N_RESTRICT_FILE_ACCESS_TO=/home/node/.n8n/backups
+      - N8N_BLOCK_FILE_ACCESS_TO_N8N_FILES=false
     volumes:
       - n8n_bizcard_data:/home/node/.n8n
 
